@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419121854) do
+ActiveRecord::Schema.define(version: 20180419105318) do
 
   create_table "blocks", force: :cascade do |t|
-    t.integer "block_index", limit: 8, null: false
+    t.decimal "block_index", null: false
     t.datetime "timestamp", null: false
-    t.bigint "proof", null: false
+    t.decimal "proof", null: false
     t.string "previous_block_hash", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

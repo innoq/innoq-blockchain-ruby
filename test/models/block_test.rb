@@ -13,8 +13,9 @@ class BlockTest < ActiveSupport::TestCase
      block = Block.new(block_index: 1, timestamp: Time.at(0), proof:"1917336", previous_block_hash: 0, transactions: [transaction1])
 
     #  expected String does not match the one given by MArcs since we sort the members.
-     expectedString = '{"index":1,"previousBlockHash":"0","proof":1917336,"timestamp":0,"transactions":[{"id":"b3c973e2-db05-4eb5-9668-3e81c7389a6d","payload":"I am Heribert Innoq","timestamp":0}]}';
-     assert block.as_json == expectedString
+     expectedString = '{"index":1,"timestamp":0,"proof":1917336,"transactions":[{"id":"b3c973e2-db05-4eb5-9668-3e81c7389a6d","timestamp":0,"payload":"I am Heribert Innoq"}],"previousBlockHash":"0"}';
+
+     assert_equal block.as_json, expectedString
 
    end
 end
