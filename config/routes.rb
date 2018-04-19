@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
+  resources :blocks, only: %i[show index]
+  resources :transactions, only: %i[new create index show]
 
-  resources :blocks, only: [:show, :index]
-
-  get '/mine', to:'mine#mine', as: 'mine'
-
+  get '/mine', to: 'mine#mine', as: 'mine'
   get 'index/index'
-
   root 'index#index'
 end
