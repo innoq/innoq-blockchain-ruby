@@ -3,12 +3,24 @@
   <head>
     <title>InnoqBlockchainRuby</title>
     <%= csrf_meta_tags %>
-
+    <link rel="stylesheet" media="all" href="https://bootstrap.assets.innoq.com/css/0.0.9/innoq-bootstrap-theme.css"/>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navigation ein- oder ausblenden">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li><%= link_to "Blocks", blocks_path %></li>
+        </ul>
+      </div>
+    </nav>
+
     <%= yield %>
+
   </body>
 </html>
