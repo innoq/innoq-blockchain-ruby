@@ -1,6 +1,7 @@
 class Block < ApplicationRecord
   has_many :transactions
 
+  default_scope { order(block_index: :desc )}
   accepts_nested_attributes_for :transactions
 
   # render this block as josn and apply robert sort to the field members
