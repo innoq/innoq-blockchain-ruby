@@ -9,7 +9,6 @@ class Block < ApplicationRecord
     transactionsJson = transactions.map(&:as_json).join","
      "{\"index\":#{block_index.round()},\"timestamp\":#{timestamp.to_i},\"proof\":#{proof.round()},\"transactions\":[#{transactionsJson}],\"previousBlockHash\":\"#{previous_block_hash}\"}"
 
-
   end
 
   def block_chain_hash()

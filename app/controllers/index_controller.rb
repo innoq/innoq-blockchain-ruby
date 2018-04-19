@@ -1,7 +1,7 @@
 
 class IndexController < ApplicationController
   def index
-    @node_id = "ruby_" + ENV['USER']
+    @node_id = "ruby" + ENV['USER']
 
 
     @block_height = Block.all.count
