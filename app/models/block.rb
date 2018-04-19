@@ -6,8 +6,7 @@ class Block < ApplicationRecord
 
   # render this block as josn and apply robert sort to the field members
   def as_json()
-    transactionsJson = transactions.map{|transaction|  "{\"id\":\"#{transaction.transaction_id}\",\"timestamp\":#{transaction.timestamp.to_i},\"payload\":\"#{transaction.payload}\"}"}.join","
-
+    transactionsJson = transactions.map(&:as_json).join","
      "{\"index\":#{block_index.round()},\"timestamp\":#{timestamp.to_i},\"proof\":#{proof.round()},\"transactions\":[#{transactionsJson}],\"previousBlockHash\":\"#{previous_block_hash}\"}"
 
 
