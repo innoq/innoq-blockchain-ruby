@@ -16,5 +16,14 @@ class Miner
     mine(new_block)
   end
 
+  # Mine using the latest block from db and the current transactions
+  def new_mine
+    previous = Block.first
+    transactions = Transaction.take(5)
+
+    block  = mine_with_previous(previous, transactions)
+    block.save
+    block
+  end
 
 end
