@@ -1,9 +1,9 @@
 <h1>List of Blocks</h1>
+
 <ul>
+<% @blocks.each do |block| %>
   <li>
-    <a href="#">Block 1</a>
+    <%= link_to(block.block_index, block ) %>
   </li>
-  <li>
-    <a href="#">Block 2</a>
-  </li>
+<% end %>
 </ul>
