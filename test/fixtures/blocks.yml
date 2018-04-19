@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  block_index: 9.99
+  timestamp: 2018-04-19 12:44:28
+  proof: 9.99
+  previous_block_hash: MyString
+
+two:
+  block_index: 9.99
+  timestamp: 2018-04-19 12:44:28
+  proof: 9.99
+  previous_block_hash: MyString
