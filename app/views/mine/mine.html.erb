@@ -1,23 +1,15 @@
 <h1>Mine</h1>
 <p>Mined a new block.</p>
-
 <dl>
   <dt>Index</dt>
   <dd><%= @block.block_index %></dd>
-
   <dt>Timestamp</dt>
   <dd><%= @block.timestamp.to_i %></dd>
-
   <dt>Proof</dt>
   <dd><%= @block.proof %></dd>
-
   <dt>Prvious Hash</dt>
   <dd><%= @block.previous_block_hash %></dd>
-
   <dt>Hash</dt>
   <dd><%= @block.block_chain_hash %></dd>
-
-
 </dl>
-
-
+<p><%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %></p>
