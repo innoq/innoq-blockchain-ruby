@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419104428) do
+ActiveRecord::Schema.define(version: 20180419105318) do
 
   create_table "blocks", force: :cascade do |t|
     t.decimal "block_index", null: false
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20180419104428) do
     t.string "previous_block_hash", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.string "transaction_id"
+    t.datetime "timestamp"
+    t.string "payload"
+    t.integer "block_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["block_id"], name: "index_transactions_on_block_id"
   end
 
 end
