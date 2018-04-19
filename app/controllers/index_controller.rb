@@ -1,7 +1,18 @@
+
 class IndexController < ApplicationController
   def index
-    @node_id = "123456789"
-    @block_height = Block.all.count
+    @node_id = "ruby" + ENV['USER']
 
+
+    @block_height = Block.all.count
+    respond_to do |format|
+      format.html { render :index}
+      format.json {
+        render json: {
+          nodeId: @node_id,
+         currentBlockHeight: @block_height }.as_json
+      }
+    end
   end
+
 end

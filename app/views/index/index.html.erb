@@ -1,9 +1,10 @@
 <h1>Fancy Ruby Blockchain!</h1>
-<p>With cats!</p>
+<p>With gems!</p>
+<div class="octagon my-3"></div>
 <p>
   Node ID: <%= @node_id %>
 </p>
 <p>
   Block Height: <%= @block_height %>
 </p>
-<%= link_to 'Mine', '/mine' %>
+<%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %>

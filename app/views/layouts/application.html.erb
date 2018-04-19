@@ -7,7 +7,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navigation ein- oder ausblenden">
@@ -15,14 +14,34 @@
       </button>
       <div class="navbar-collapse collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link"  %></li>
+          <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link"  %></li>
           <li class="nav-item"><%= link_to "Blocks", blocks_path, class: "nav-link"  %></li>
+          <li class="nav-item"><%= link_to "Transactions", transactions_path, class: "nav-link"  %></li>
         </ul>
       </div>
     </nav>
     <div class="container">
       <%= yield %>
     </div>
-
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+  <script>
+    var defaults = {
+      cell_size: 20,
+      variance: 0.75,
+      stroke_width: 0.2,
+      width: 80,
+      height: 80,
+      seed: null
+    };
+    var pattern = Trianglify(defaults);
+    var gems = document.getElementsByClassName('octagon');
+    console.log(gems);
+
+    for (var i = 0; i < gems.length; i++) {
+      var gem = gems[i];
+      console.log(gem);
+      gem.appendChild(pattern.canvas());
+    }
+  </script>
 </html>

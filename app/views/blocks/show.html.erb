@@ -1,22 +1,15 @@
 <h1>Block  <%= @block.block_index %> </h1>
 <p>Lustiger Block Nummer <%= @block.block_index %>!</p>
-
 <dl>
   <dt>Index</dt>
   <dd><%= @block.block_index %></dd>
-
   <dt>Timestamp</dt>
   <dd><%= @block.timestamp.to_i %></dd>
-
   <dt>Proof</dt>
   <dd><%= @block.proof %></dd>
-
   <dt>Prvious Hash</dt>
   <dd><%= @block.previous_block_hash %></dd>
-
   <dt>Hash</dt>
   <dd><%= @block.block_chain_hash %></dd>
-
-
 </dl>
-
+<p><%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %></p>
