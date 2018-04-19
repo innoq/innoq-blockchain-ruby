@@ -11,4 +11,8 @@ class Block < ApplicationRecord
 
 
   end
+
+  def block_chain_hash()
+    Digest::SHA256.hexdigest(as_json.to_s)
+  end
 end

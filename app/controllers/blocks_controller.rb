@@ -6,5 +6,6 @@ class BlocksController < ApplicationController
   end
 
   def show
+    @block = Block.find(params[:id])
   end
 end

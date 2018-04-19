@@ -16,6 +16,6 @@ class MinerTest < ActiveSupport::TestCase
     old = blocks(:one)
     newBlock = miner.mine_with_previous(old)
 
-    assert newBlock.previous_block_hash == miner.hash(old)
+    assert newBlock.previous_block_hash == old.block_chain_hash
   end
 end
