@@ -1,9 +1,9 @@
 <h1>List of Blocks</h1>
-
 <ul>
-<% @blocks.each do |block| %>
-  <li>
-    <%= link_to(block.block_index, block ) %>
-  </li>
-<% end %>
+  <% @blocks.each do |block| %>
+    <li>
+      <%= link_to(block.block_index, block ) %>
+    </li>
+  <% end %>
 </ul>
+<p><%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %></p>
