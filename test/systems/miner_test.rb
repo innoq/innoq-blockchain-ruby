@@ -1,6 +1,6 @@
 require 'test_helper'
 require 'time'
-require "miner"
+
 class MinerTest < ActiveSupport::TestCase
   test 'the truth' do
     assert true
