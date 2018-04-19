@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :blocks, only: [:show, :index]
+
+  get '/mine', to:'mine#mine', as: 'mine'
+
+  get 'index/index'
+
+  root 'index#index'
 end
