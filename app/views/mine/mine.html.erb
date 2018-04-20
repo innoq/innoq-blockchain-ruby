@@ -1,5 +1,5 @@
 <h1>Mine</h1>
-<p>Mined a new block.</p>
+<p class="alert alert-info">Mined a new block. It took <%= @time %> seconds.</p>
 <dl>
   <dt>Index</dt>
   <dd><%= @block.block_index %></dd>
@@ -9,10 +9,19 @@
   <dd><%= @block.proof %></dd>
   <dt>Transactions</dt>
   <dd><%= @block.transactions.size %></dd>
-
   <dt>Prvious Hash</dt>
   <dd><%= @block.previous_block_hash %></dd>
   <dt>Hash</dt>
   <dd><%= @block.block_chain_hash %></dd>
+  <% if @block.transactions.present? %>
+    <dt>Transactions</dt>
+    <dd>
+      <% @block.transactions.each do |transaction| %>
+        <%= link_to transaction.transaction_id, transaction %>
+      <% end %>
+    </dd>
+  <% else %>
+    Keine Transactions
+  <% end %>
 </dl>
-<p><%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %></p>
+<p><%= link_to 'Show block', @block, class: 'btn btn-dark' %></p>

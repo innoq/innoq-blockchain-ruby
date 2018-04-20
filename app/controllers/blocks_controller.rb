@@ -10,7 +10,7 @@ class BlocksController < ApplicationController
   def show
     @block = Block.find(params[:id])
     respond_to do |format|
-      format.html { render :index }
+      format.html { render :show }
       format.json { render json: @block }
     end
   end

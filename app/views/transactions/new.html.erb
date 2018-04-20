@@ -1,4 +1,4 @@
-<h1>Transaction New</h1>
+<h1>Neue Transaktion</h1>
 <% unless @transaction.valid? %>
   <div class="alert alert-danger">
     <%= @transaction.errors.messages %>
@@ -6,8 +6,8 @@
 <% end %>
 <%= form_for @transaction, url: transactions_path, class: 'form' do |f| %>
   <div class="form-group">
-    <%= f.label :payload %>
-    <%= f.text_field :payload %>
+    <%= f.label :payload, class: 'form-control-label' %>
+    <%= f.text_field :payload, class: 'form-control' %>
   </div>
   <div>
     <%= f.submit 'Speichern', class: 'btn btn-dark' %>

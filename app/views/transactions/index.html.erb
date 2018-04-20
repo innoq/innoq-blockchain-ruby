@@ -2,8 +2,8 @@
 <ul>
   <% @transactions.each do |transaction| %>
     <li>
-      <%= link_to(transaction.transaction_id, transaction ) %>
+      <%= link_to("#{transaction.transaction_id} - #{transaction.created_at}", transaction ) %>
     </li>
   <% end %>
 </ul>
-<%= link_to 'Neue Transaction', new_transaction_path %>
+<%= link_to 'Neue Transaktion', new_transaction_path, class: 'btn btn-dark' %>
