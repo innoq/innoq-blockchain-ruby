@@ -21,6 +21,10 @@ class NodesController < ApplicationController
 
   def register; end
 
+  def sync
+    redirect_to nodes_path, notice: 'Node was successfully synced.'
+  end
+
   # POST /nodes
   # POST /nodes.json
   def create
