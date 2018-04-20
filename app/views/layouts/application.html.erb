@@ -50,27 +50,5 @@
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
-<<<<<<< Updated upstream
-  <script>
-    var defaults = {
-      cell_size: 20,
-      variance: 0.75,
-      stroke_width: 0.2,
-      width: 80,
-      height: 80,
-      seed: null
-    };
-    var pattern = Trianglify(defaults);
-    var gems = document.getElementsByClassName('octagon');
-    console.log(gems);
-    
-    for (var i = 0; i < gems.length; i++) {
-      var gem = gems[i];
-      console.log(gem);
-      gem.appendChild(pattern.canvas());
-    }
-  </script>
-=======
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
->>>>>>> Stashed changes
 </html>
