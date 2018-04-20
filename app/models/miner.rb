@@ -3,9 +3,9 @@ require 'json'
 class Miner
   THREAD_COUNT = 4
 
-  def mine(params, prefix = '0000', stride = 1)
+  def mine(params, stride = 1)
     puts "Miner:mine #{params.inspect}"
-    mine_with_all_hands(params, prefix)
+    mine_with_all_hands(params)
   end
 
   def mine_with_previous(previous, transactions = [])
@@ -24,14 +24,14 @@ class Miner
 
   private
 
-  def try_next(block, prefix, stride)
+  def try_next(block, stride)
     block.proof += stride
     # $stderr.puts "Try Block: #{block.inspect}"
-    block.hash_starts_with?(prefix)
+    block.hash_valid_cached?
   end
 
 
-  def mine_with_all_hands(params, prefix, thread_count = THREAD_COUNT)
+  def mine_with_all_hands(params, thread_count = THREAD_COUNT)
     mu = Mutex.new
     threads = []
     found = nil
@@ -39,9 +39,10 @@ class Miner
     thread_count.times do |i|
       threads << Thread.new do
         block = Block.new(params)
+        block.cache_json_fragments
         block.proof = i - thread_count # try_next increments
         until found do
-          if try_next(block, prefix, thread_count)
+          if try_next(block, thread_count)
             mu.synchronize do
               found ||= block
             end

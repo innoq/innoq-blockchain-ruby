@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Available:</strong>
+  <%= @node.available %>
+</p>
+
+<p>
+  <strong>Host:</strong>
+  <%= @node.host %>
+</p>
+
+<p>
+  <strong>Node:</strong>
+  <%= @node.node_id %>
+</p>
+
+<%= link_to 'Edit', edit_node_path(@node) %> |
+<%= link_to 'Back', nodes_path %>

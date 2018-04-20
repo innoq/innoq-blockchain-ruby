@@ -2,11 +2,7 @@ require 'test_helper'
 require 'json'
 
 class BlockTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-  #
-  #
+
    test "can serialize to json" do
 
      transaction1 = Transaction.new(transaction_id:"b3c973e2-db05-4eb5-9668-3e81c7389a6d", timestamp: Time.at(0), payload: "I am Heribert Innoq")

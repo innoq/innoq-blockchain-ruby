@@ -1,10 +1,10 @@
 <h1>List of Blocks</h1>
-<ul>
+<ul class="block-list">
   <% @blocks.each do |block| %>
     <li>
-      <%= link_to(block.block_index, block ) %>
+      <h2>Block <%= link_to(block.block_index, block ) %></h2>
+      <div class="gem octagon my-3" data-seed="<%= block.block_chain_hash %>"></div>
     </li>
   <% end %>
 </ul>
 <p><%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %></p>
-<div class="diamond"></div>

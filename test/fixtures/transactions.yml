@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  transaction_id: MyString
-  timestamp: 2018-04-19 12:53:18
-  payload: MyString
+  transaction_id: b3c973e2-db05-4eb5-9668-3e81c7389a6d
+  timestamp: 1970-01-01 00:00:00
+  payload: I am Heribert Innoq
   block: one
 
 two:
   transaction_id: MyString
   timestamp: 2018-04-19 12:53:18
   payload: MyString
-  block: two
+  block:
