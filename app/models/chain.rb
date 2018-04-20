@@ -26,9 +26,8 @@ class Chain
 
   def merge(other)
     latest = find_latest_common_block(other)
-    other_branch = other.blocks[latest + 1..other.blocks.size - 1]
-    our_branch = @blocks[latest + 1..blocks.size - 1]
-    lost_blocks = []
+    other_branch = other.blocks[(latest + 1)..(other.blocks.size - 1)]
+    our_branch = @blocks[(latest + 1)..(blocks.size - 1)]
 
     if @blocks.size > other.blocks.size
       # our chain is longer, but retain "there" transactions
@@ -65,12 +64,15 @@ class Chain
   end
 
   def find_latest_common_block(other)
-    for i in 0..[@blocks.size, other.blocks.size].max
+    range_end = [@blocks.size, other.blocks.size].min - 1
+    for i in (0..range_end)
+      puts i
       if @blocks[i].block_chain_hash != other.blocks[i].block_chain_hash
         return i - 1
       end
       i
     end
+    range_end
   end
 
   attr_reader :blocks

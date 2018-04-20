@@ -32,7 +32,7 @@ class NodesController < ApplicationController
       merged = ours.merge theirs
       logger.info merged
       message = merged ? 'Our Chain was successfully synced from Node.' : 'Our Chain is up to date.'
-      render :show, notice: message
+      render :show, notice: 'message'
     else
       render :show, alert: 'Node had invalid chain.'
     end
@@ -98,7 +98,7 @@ class NodesController < ApplicationController
     blocks_data.each do |block|
       block['block_index'] = block.delete('index')
       block['previous_block_hash'] = block.delete('previousBlockHash')
-      block['timestamp'] = Time.at(block.delete('timestamp') / 1000)
+      block['timestamp'] = Time.at(block.delete('timestamp'))
       transactions = parse_transactions block.delete('transactions')
       new_block = Block.new(block)
       new_block.transactions = transactions
@@ -111,7 +111,7 @@ class NodesController < ApplicationController
     transactions = []
     transactions_data.each do |transaction|
       transaction['transaction_id'] = transaction.delete('id')
-      transaction['timestamp'] = Time.at(transaction.delete('timestamp') / 1000)
+      transaction['timestamp'] = Time.at(transaction.delete('timestamp'))
       transactions << Transaction.new(transaction)
     end
     transactions

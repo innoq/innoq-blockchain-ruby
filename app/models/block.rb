@@ -4,7 +4,7 @@ class Block < ApplicationRecord
   default_scope { order(block_index: :desc) }
   accepts_nested_attributes_for :transactions
 
-  validate :block_index, uniqueness: true
+  validates :block_index, uniqueness: true
 
   PREFIX = '0000'.freeze
 
