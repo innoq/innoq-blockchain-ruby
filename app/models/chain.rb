@@ -14,14 +14,12 @@ class Chain
   def is_hash_valid?
     return false unless @blocks.all?(&:is_hash_valid?)
 
-    expected_hash = 0
-    for i in 1..@blocks.size - 1
-      puts i
-      return false if !@blocks[i].previous_block_hash == expected_hash
-      expected_hash = @blocks[i].block_chain_hash
-    end
-    true
-    ## Validate hash points to previous lbock
+    expected_hash = '0'
+    @blocks.all? {|block|
+      ok = block.previous_block_hash == expected_hash
+      expected_hash = block.block_chain_hash
+      ok
+    }
   end
 
   def merge(other)
@@ -64,15 +62,10 @@ class Chain
   end
 
   def find_latest_common_block(other)
-    range_end = [@blocks.size, other.blocks.size].min - 1
-    for i in (0..range_end)
-      puts i
-      if @blocks[i].block_chain_hash != other.blocks[i].block_chain_hash
-        return i - 1
-      end
-      i
-    end
-    range_end
+    b1s = @blocks
+    b2s = other.blocks
+    mx = [b1s.size, b2s.size].min
+    mx.times { |i| break i - 1 if b1s[i] != b2s[i] }
   end
 
   attr_reader :blocks
