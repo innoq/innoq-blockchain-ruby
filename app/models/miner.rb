@@ -27,7 +27,7 @@ class Miner
   def try_next(block, stride)
     block.proof += stride
     # $stderr.puts "Try Block: #{block.inspect}"
-    block.is_hash_valid?
+    block.hash_valid_cached?
   end
 
 
@@ -39,6 +39,7 @@ class Miner
     thread_count.times do |i|
       threads << Thread.new do
         block = Block.new(params)
+        block.cache_json_fragments
         block.proof = i - thread_count # try_next increments
         until found do
           if try_next(block, thread_count)
