@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419121854) do
+ActiveRecord::Schema.define(version: 20180420082337) do
 
   create_table "blocks", force: :cascade do |t|
     t.integer "block_index", limit: 8, null: false
     t.datetime "timestamp", null: false
     t.bigint "proof", null: false
     t.string "previous_block_hash", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "event", null: false
+    t.text "data", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

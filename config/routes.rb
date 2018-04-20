@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get '/mine', to: 'mine#mine', as: 'mine'
   get 'index/index'
   root 'index#index'
+
+  get '/events', to: 'events#index'
 end
