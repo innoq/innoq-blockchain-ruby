@@ -1,4 +1,5 @@
 <h1>Block  <%= @block.block_index %> </h1>
+<div class="gem octagon my-3" data-seed="<%= @block.block_chain_hash %>"></div>
 <dl>
   <dt>Index</dt>
   <dd><%= @block.block_index %></dd>
@@ -6,7 +7,7 @@
   <dd><%= @block.timestamp.to_i %></dd>
   <dt>Proof</dt>
   <dd><%= @block.proof %></dd>
-  <dt>Prvious Hash</dt>
+  <dt>Previous Hash</dt>
   <dd><%= @block.previous_block_hash %></dd>
   <dt>Hash</dt>
   <dd><%= @block.block_chain_hash %></dd>
