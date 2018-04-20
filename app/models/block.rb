@@ -4,6 +4,8 @@ class Block < ApplicationRecord
   default_scope { order(block_index: :desc) }
   accepts_nested_attributes_for :transactions
 
+  validate :block_index, uniqueness: true
+
   PREFIX = '0000'.freeze
 
   # render this block as josn and apply robert sort to the field members

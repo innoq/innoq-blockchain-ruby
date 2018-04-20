@@ -26,7 +26,16 @@ class NodesController < ApplicationController
   def sync
     @node = Node.find(params[:id])
     @blocks = parse_blocks fetch_blocks(@node)
-    render :show, notice: 'Node was successfully synced.'
+    ours = Chain.new(Block.all)
+    theirs = Chain.new(@blocks)
+    if theirs.is_hash_valid?
+      merged = ours.merge theirs
+      logger.info merged
+      message = merged ? 'Our Chain was successfully synced from Node.' : 'Our Chain is up to date.'
+      render :show, notice: message
+    else
+      render :show, alert: 'Node had invalid chain.'
+    end
   end
 
   # POST /nodes
