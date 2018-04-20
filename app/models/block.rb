@@ -4,11 +4,6 @@ class Block < ApplicationRecord
   default_scope { order(block_index: :desc )}
   accepts_nested_attributes_for :transactions
 
-  after_initialize do |block|
-    block.proof = 0
-  end
-
-
   # render this block as josn and apply robert sort to the field members
   def as_json()
     transactionsJson = transactions.map(&:as_json).join","

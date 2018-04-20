@@ -26,7 +26,7 @@ class Miner
 
   def try_next(block, prefix, stride)
     block.proof += stride
-    # $stderr.puts "Try Block: #{block.inspect}"
+    $stderr.puts "Try Block: #{block.inspect}"
     block.hash_starts_with?(prefix)
   end
 
@@ -39,8 +39,9 @@ class Miner
     thread_count.times do |i|
       threads << Thread.new do
         block = Block.new(params)
+        block.proof = i - thread_count # try_next increments
         until found do
-          if try_next(block, prefix, i + 1)
+          if try_next(block, prefix, thread_count)
             mu.synchronize do
               found ||= block
             end
