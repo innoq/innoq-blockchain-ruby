@@ -23,4 +23,28 @@ class ChainTest < ActiveSupport::TestCase
    assert_not chain.is_hash_valid?
   end
 
+
+  test "find Latest Common Block Workd" do
+    miner = Miner.new
+    one = blocks(:one)
+    two = blocks(:two)
+    three_a = miner.mine_with_previous(two)
+    three_b = miner.mine_with_previous(two, [Transaction.new(payload: "foo")])
+
+    chain_a = Chain.new([one,two,three_a])
+    chain_b = Chain.new([one,two,three_b])
+
+    assert_equal 1, chain_a.find_latest_common_block(chain_b)
+  end
+
+  test "find Latest Common if no common" do
+    miner = Miner.new
+    one = blocks(:one)
+    two = blocks(:two)
+    chain_a = Chain.new([one])
+    chain_b = Chain.new([two])
+
+    assert_equal -1, chain_a.find_latest_common_block(chain_b)
+  end
+
 end
