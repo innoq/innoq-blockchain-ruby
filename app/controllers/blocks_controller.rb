@@ -1,18 +1,22 @@
 class BlocksController < ApplicationController
   def index
-    # lade alles auder db
     @blocks = Block.all
     respond_to do |format|
       format.html { render :index}
       format.json {
-        render json: "{ \"blocks\": [" + @blocks.map(&:as_json).join(",") + "] }"
+        render json:
+                 {
+                   blocks: @blocks
+                 }
       }
     end
-
-    # schicke an view
   end
 
   def show
     @block = Block.find(params[:id])
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @block }
+    end
   end
 end
