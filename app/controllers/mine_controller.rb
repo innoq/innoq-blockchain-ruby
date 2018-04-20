@@ -4,7 +4,11 @@ class MineController < ApplicationController
     respond_to do |format|
       format.html { render :mine}
       format.json {
-        render json: "{\"message\" : \"done\", \"block\" : #{@block.as_json} } "
+        render json:
+        {
+          message: "done",
+          block: @block
+        }
       }
     end
   end

@@ -5,13 +5,24 @@ class Block < ApplicationRecord
   accepts_nested_attributes_for :transactions
 
   # render this block as josn and apply robert sort to the field members
-  def as_json()
-    transactionsJson = transactions.map(&:as_json).join","
-     "{\"index\":#{block_index.round()},\"timestamp\":#{timestamp.to_i},\"proof\":#{proof.round()},\"transactions\":[#{transactionsJson}],\"previousBlockHash\":\"#{previous_block_hash}\"}"
+  def to_builder()
+    Jbuilder.new do |json|
+      json.index block_index
+      json.timestamp timestamp.to_i
+      json.proof proof
 
+      json.transactions(transactions) do |transaction|
+        json.merge! transaction.to_builder.attributes!
+      end
+      json.previousBlockHash previous_block_hash
+    end
+  end
+
+  def as_json(options=nil)
+    to_builder.attributes!
   end
 
   def block_chain_hash()
-    Digest::SHA256.hexdigest(as_json.to_s)
+    Digest::SHA256.hexdigest(as_json.to_json)
   end
 end
