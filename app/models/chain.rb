@@ -64,7 +64,7 @@ class Chain
   def find_latest_common_block(other)
     b1s = @blocks
     b2s = other.blocks
-    mx = [b1s.size, b2s.size].min
+    mx = [b1s.size, b2s.size].max
     mx.times { |i| break i - 1 if b1s[i] != b2s[i] }
   end
 
