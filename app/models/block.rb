@@ -1,7 +1,7 @@
 class Block < ApplicationRecord
   has_many :transactions
 
-  default_scope { order(block_index: :desc )}
+  default_scope {order(block_index: :desc)}
   accepts_nested_attributes_for :transactions
 
   # render this block as josn and apply robert sort to the field members
@@ -18,8 +18,12 @@ class Block < ApplicationRecord
     end
   end
 
-  def as_json(options=nil)
+  def as_json(options = nil)
     to_builder.attributes!
+  end
+
+  def hash_starts_with?(prefix)
+    block_chain_hash.start_with?(prefix)
   end
 
   def block_chain_hash()
