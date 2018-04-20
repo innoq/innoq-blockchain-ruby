@@ -1,17 +1,20 @@
 class MineController < ApplicationController
   def mine
-    @block = Miner.new.new_mine
+    new_block = nil
+    @time = Benchmark.realtime do
+      new_block = Miner.new.new_mine
+    end
+    @block = new_block
     Event.post_new_block(@block)
-
     respond_to do |format|
-      format.html { render :mine}
-      format.json {
+      format.html { render :mine }
+      format.json do
         render json:
         {
-          message: "done",
+          message: 'done',
           block: @block
         }
-      }
+      end
     end
   end
 end

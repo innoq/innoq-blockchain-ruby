@@ -13,7 +13,7 @@
     <% @nodes.each do |node| %>
       <tr>
         <td><%= node.node_id %></td>
-        <td><%= node.host %></td>
+        <td><a href="<%= node.host %>"><%= node.host %></a></td>
         <td><%= node.available %></td>
         <td><%= link_to 'Show', node %></td>
         <td><%= link_to 'Edit', edit_node_path(node) %></td>
