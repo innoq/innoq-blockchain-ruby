@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :nodes do
-    get '/sync', action: 'sync', as: 'sync'
+    member do
+      get '/sync', action: 'sync', as: 'sync'
+    end
   end
   resources :blocks, only: %i[show index]
   resources :transactions, only: %i[new create index show]
