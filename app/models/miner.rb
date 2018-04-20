@@ -5,7 +5,7 @@ class Miner
     puts "Miner:mine #{params.inspect}"
     block = Block.new(params)
     block.proof = 0
-    until block.block_chain_hash.start_with?('0000')
+    until block.valid?
       block.proof += 1
     end
     block

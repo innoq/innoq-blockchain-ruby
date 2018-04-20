@@ -4,7 +4,6 @@ class Chain
     @blocks = blocks
   end
 
-  # render this block as josn and apply robert sort to the field members
   def as_json(options=nil)
     {
       blocks: @blocks.as_json
@@ -12,8 +11,10 @@ class Chain
   end
 
   # Make sure this chain is valid
-  def validate()
-    # todo
-  #  Digest::SHA256.hexdigest(as_json.to_s)
+  def valid?()
+    blocks.each do |block|
+       blocks.all? &:valid?
+    end
+    ## Validate hash points to previous lbock
   end
 end

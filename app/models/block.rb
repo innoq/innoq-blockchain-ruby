@@ -25,4 +25,10 @@ class Block < ApplicationRecord
   def block_chain_hash()
     Digest::SHA256.hexdigest(as_json.to_json)
   end
+
+  def valid?
+    block_chain_hash.start_with?('0000')
+  end
+
+
 end
