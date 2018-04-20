@@ -1,5 +1,4 @@
 <h1>Block  <%= @block.block_index %> </h1>
-<p>Lustiger Block Nummer <%= @block.block_index %>!</p>
 <dl>
   <dt>Index</dt>
   <dd><%= @block.block_index %></dd>
@@ -11,5 +10,14 @@
   <dd><%= @block.previous_block_hash %></dd>
   <dt>Hash</dt>
   <dd><%= @block.block_chain_hash %></dd>
+  <% if @block.transactions.present? %>
+    <dt>Transactions</dt>
+    <dd>
+      <% @block.transactions.each do |transaction| %>
+        <%= link_to transaction.transaction_id, transaction %>
+      <% end %>
+    </dd>
+  <% else %>
+    Keine Transactions
+  <% end %>
 </dl>
-<p><%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %></p>

@@ -1,1 +1,11 @@
 <h1>Transaction Show</h1>
+<dl>
+  <dt>ID</dt>
+  <dd><%= @transaction.transaction_id %></dd>
+  <dt>Timestamp</dt>
+  <dd><%= @transaction.timestamp.to_i %></dd>
+  <dt>Payload</dt>
+  <dd><%= @transaction.payload %></dd>
+  <dt>Block</dt>
+  <dd><%= link_to @transaction.block.block_index, @transaction.block if @transaction.block.present? %></dd>
+</dl>

@@ -20,6 +20,32 @@
         </ul>
       </div>
     </nav>
+    <% if alert %>
+      <div class="alert alert-danger animated fadeIn" role="alert">
+        <div class="container alert-dismissible d-flex justify-content-between align-items-center">
+          <span class="alert-message">
+            <i class="fa fa-bolt mr-1"></i>
+            <%= alert %>
+          </span>
+          <button type="button" class="btn btn-sm btn-link" data-dismiss="alert" aria-label="Schliessen">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    <% end %>
+    <% if notice %>
+      <div class="alert alert-success alert-container animated fadeIn" role="alert">
+        <div class="container alert-dismissible d-flex justify-content-between align-items-center">
+          <span class="alert-message">
+            <i class="fa fa-check mr-1"></i>
+            <%= notice %>
+          </span>
+          <button type="button" class="btn btn-sm btn-link" data-dismiss="alert" aria-label="Schliessen">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    <% end %>
     <div class="container">
       <%= yield %>
     </div>
@@ -37,7 +63,7 @@
     var pattern = Trianglify(defaults);
     var gems = document.getElementsByClassName('octagon');
     console.log(gems);
-
+    
     for (var i = 0; i < gems.length; i++) {
       var gem = gems[i];
       console.log(gem);
