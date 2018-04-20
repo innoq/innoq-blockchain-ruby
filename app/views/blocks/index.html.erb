@@ -3,7 +3,7 @@
   <% @blocks.each do |block| %>
     <li>
       <h2>Block <%= link_to(block.block_index, block ) %></h2>
-      <div class="gem octagon my-3" data-seed="<%= block.block_chain_hash %>"></div>
+      <div class="gem <%= ["diamond", "trapez", "heptagon","octagon", "nonagon", "decagon", "princess"].sample(1, random: Random.new(block.block_chain_hash.to_i(16))).first %> my-3" data-seed="<%= block.block_chain_hash %>"></div>
     </li>
   <% end %>
 </ul>
