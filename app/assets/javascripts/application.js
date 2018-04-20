@@ -13,3 +13,24 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+var gems = document.getElementsByClassName('gem');
+var defaults = {
+  cell_size: 20,
+  variance: 0.75,
+  stroke_width: 0.2,
+  width: 80,
+  height: 80,
+  seed: 0
+};
+
+console.log(gems);
+
+for (var i = 0; i < gems.length; i++) {
+  var gem = gems[i];
+  var seed = gem.getAttribute("data-seed");
+  defaults.seed = seed;
+  var pattern = Trianglify(defaults);
+  console.log(gem);
+  gem.appendChild(pattern.canvas());
+}
