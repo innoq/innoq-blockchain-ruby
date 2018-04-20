@@ -55,7 +55,10 @@ class Chain
       #
       our_branch.each {|block|
           transactions = block.transactions
-          block.transactions = Transaction.none
+          transactions.each {|t|
+            puts " Nulling transactions block_id"
+            t.block_id=nil
+          }
           block.delete
           transactions.each(&:save)
       }
