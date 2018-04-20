@@ -1,2 +1,9 @@
 <h1>Transaction Index</h1>
+<ul>
+  <% @transactions.each do |transaction| %>
+    <li>
+      <%= link_to(transaction.transaction_id, transaction ) %>
+    </li>
+  <% end %>
+</ul>
 <%= link_to 'Neue Transaction', new_transaction_path %>

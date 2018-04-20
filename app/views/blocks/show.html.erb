@@ -11,5 +11,13 @@
   <dd><%= @block.previous_block_hash %></dd>
   <dt>Hash</dt>
   <dd><%= @block.block_chain_hash %></dd>
+  <% if @block.transactions.present? %>
+    <dt>Transactions</dt>
+    <dd>
+      <% @block.transactions.each do |transaction| %>
+        <%= link_to transaction.transaction_id, transaction %>
+      <% end %>
+    </dd>
+  <% end %>
 </dl>
 <p><%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %></p>
