@@ -14,8 +14,8 @@ class EventsController < ApplicationController
           events.each do |ev|
             sse.write(ev.to_sse)
           end
-        else
-          sse.write("\n")
+        # else
+        #   sse.write("\n")
         end
         sleep 1
       end

@@ -28,6 +28,8 @@ class NodesController < ApplicationController
 
     respond_to do |format|
       if @node.save
+        Event.post_new_node(@node)
+
         format.html { redirect_to @node, notice: 'Node was successfully created.' }
         format.json { render :show, status: :created, location: @node }
       else
