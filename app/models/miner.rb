@@ -26,7 +26,7 @@ class Miner
 
   def try_next(block, prefix, stride)
     block.proof += stride
-    $stderr.puts "Try Block: #{block.inspect}"
+    # $stderr.puts "Try Block: #{block.inspect}"
     block.hash_starts_with?(prefix)
   end
 
