@@ -17,7 +17,7 @@
 var gems = document.getElementsByClassName('gem');
 var defaults = {
   cell_size: 20,
-  variance: 0.75,
+  variance: 1,
   stroke_width: 0.2,
   width: 80,
   height: 80,

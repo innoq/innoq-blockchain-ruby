@@ -14,6 +14,8 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
+        Event.post_new_transation(@transaction)
+
         format.html { redirect_to transactions_path, notice: 'Transaction erfolgreich angelegt.' }
         # format.json { render :show, status: :created, location: @transaction }
       else

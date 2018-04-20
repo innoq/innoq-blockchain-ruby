@@ -4,7 +4,7 @@ class Block < ApplicationRecord
   default_scope { order(block_index: :desc) }
   accepts_nested_attributes_for :transactions
 
-  PREFIX = "0000"
+  PREFIX = '0000'.freeze
 
   # render this block as josn and apply robert sort to the field members
   def to_builder
@@ -37,8 +37,8 @@ class Block < ApplicationRecord
   end
 
   def cache_json_fragments
-    temp = self.proof
-    magic_int = 324567890765432
+    temp = proof
+    magic_int = 324_567_890_765_432
     self.proof = magic_int
     json = as_json.to_json
     @json_parts = json.split(/324567890765432/, 2)
@@ -46,7 +46,6 @@ class Block < ApplicationRecord
   end
 
   def hash_valid_cached?
-    Digest::SHA256.hexdigest(@json_parts[0]+proof.to_s+@json_parts[1]).start_with?(PREFIX)
+    Digest::SHA256.hexdigest(@json_parts[0] + proof.to_s + @json_parts[1]).start_with?(PREFIX)
   end
-
 end

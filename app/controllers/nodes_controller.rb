@@ -1,3 +1,5 @@
+require 'net/http'
+
 class NodesController < ApplicationController
   before_action :set_node, only: %i[show edit update destroy]
 
@@ -22,7 +24,9 @@ class NodesController < ApplicationController
   def register; end
 
   def sync
-    redirect_to nodes_path, notice: 'Node was successfully synced.'
+    @node = Node.find(params[:id])
+    @blocks = parse_blocks fetch_blocks(@node)
+    render :show, notice: 'Node was successfully synced.'
   end
 
   # POST /nodes
@@ -32,6 +36,8 @@ class NodesController < ApplicationController
 
     respond_to do |format|
       if @node.save
+        Event.post_new_node(@node)
+
         format.html { redirect_to @node, notice: 'Node was successfully created.' }
         format.json { render :show, status: :created, location: @node }
       else
@@ -75,5 +81,40 @@ class NodesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def node_params
     params.require(:node).permit(:available, :host, :node_id)
+  end
+
+  def parse_blocks(chain_data)
+    blocks_data = chain_data['blocks']
+    blocks = []
+    blocks_data.each do |block|
+      block['block_index'] = block.delete('index')
+      block['previous_block_hash'] = block.delete('previousBlockHash')
+      block['timestamp'] = Time.at(block.delete('timestamp') / 1000)
+      transactions = parse_transactions block.delete('transactions')
+      new_block = Block.new(block)
+      new_block.transactions = transactions
+      blocks << new_block
+    end
+    blocks
+  end
+
+  def parse_transactions(transactions_data)
+    transactions = []
+    transactions_data.each do |transaction|
+      transaction['transaction_id'] = transaction.delete('id')
+      transaction['timestamp'] = Time.at(transaction.delete('timestamp') / 1000)
+      transactions << Transaction.new(transaction)
+    end
+    transactions
+  end
+
+  def fetch_blocks(node)
+    uri = URI.parse("#{node.host}/blocks")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.initialize_http_header('Accept' => 'application/json')
+    response = http.request(request)
+    data = response.body
+    JSON.parse(data)
   end
 end

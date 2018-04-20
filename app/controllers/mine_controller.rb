@@ -5,6 +5,7 @@ class MineController < ApplicationController
       new_block = Miner.new.new_mine
     end
     @block = new_block
+    Event.post_new_block(@block)
     respond_to do |format|
       format.html { render :mine }
       format.json do

@@ -1,5 +1,5 @@
 <h1>Mine</h1>
-<p class="alert alert-info">Mined a new block. It took <%= @time %> seconds.</p>
+<p class="alert alert-info">Mined a new block. It took <%= number_with_precision @time %> seconds.</p>
 <dl>
   <dt>Index</dt>
   <dd><%= @block.block_index %></dd>
