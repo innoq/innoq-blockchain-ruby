@@ -47,4 +47,25 @@ class ChainTest < ActiveSupport::TestCase
     assert_equal -1, chain_a.find_latest_common_block(chain_b)
   end
 
+
+  test "merge Chains" do
+    miner = Miner.new
+    one = blocks(:one)
+    two = blocks(:two)
+    three_a = miner.mine_with_previous(two)
+    four_a = miner.mine_with_previous(three_a)
+    lost_transaction = Transaction.new(payload: "Lost Transaction")
+    three_b = miner.mine_with_previous(two, [lost_transaction])
+
+    chain_a = Chain.new([one,two,three_a, four_a])
+    chain_b = Chain.new([one,two,three_b])
+    #
+    chain_a.merge(chain_b)
+
+    puts "Open Transactions:"
+
+    assert Transaction.open.any? {|t|
+      t == lost_transaction
+    }
+  end
 end

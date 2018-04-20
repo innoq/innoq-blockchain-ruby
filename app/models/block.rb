@@ -42,7 +42,6 @@ class Block < ApplicationRecord
     self.proof = magic_int
     json = as_json.to_json
     @json_parts = json.split(/324567890765432/, 2)
-    puts "Json Fragments are: " +  @json_parts.inspect
     self.proof = temp
   end
 

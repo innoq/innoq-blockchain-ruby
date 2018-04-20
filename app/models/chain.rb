@@ -31,15 +31,38 @@ class Chain
 
 
   def merge(other)
-
-
     latest = find_latest_common_block(other)
-    #if block.size >
+    other_branch=other.blocks[latest+1..other.blocks.size-1]
+    our_branch= @blocks[latest+1..blocks.size-1]
+    lost_blocks=[]
 
-    # Längste Chain behalten
-    # überflüssige Blöcke aus der DB löschen. Dabei Pro BLock die Transactions "rausnehmen", Transactions persistieren
-    # "verlorene" Transaktionen
+    if @blocks.size > other.blocks.size
+      # our chain is longer, but retain "there" transactions
+      other_branch.each { |block|
+        transactions = block.transactions
+        puts "block #{block.inspect} has transactions: #{transactions.inspect}"
+        #block.transactions=Transaction.none
 
+        transactions.each {|t|
+          puts " Nulling transactions block_id"
+          t.block_id=nil
+        }
+        transactions.each(&:save)
+      }
+    else
+      # There chain is longer
+      # unassign lost transactions, delete blocks
+      #
+      our_branch.each {|block|
+          transactions = block.transactions
+          block.transactions = Transaction.none
+          block.delete
+          transactions.each(&:save)
+      }
+      # store all new blocks from other
+      other_branch.each(&:save)
+      @blocks=other.blocks
+    end
   end
 
   def find_latest_common_block(other)
@@ -50,7 +73,6 @@ class Chain
       i
     end
   end
-
 
   attr_reader :blocks
 

@@ -10,7 +10,9 @@ class Miner
 
   def mine_with_previous(previous, transactions = [])
     new_block = {block_index: previous.block_index + 1, timestamp: Time.now, transactions: transactions, previous_block_hash: previous.block_chain_hash}
-    mine(new_block)
+    block = mine(new_block)
+    block.save
+    block
   end
 
   # Mine using the latest block from db and the current transactions
