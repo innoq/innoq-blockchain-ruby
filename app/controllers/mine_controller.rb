@@ -2,7 +2,7 @@ class MineController < ApplicationController
   def mine
     new_block = nil
     @time = Benchmark.realtime do
-      new_block = Miner.new.new_mine
+      new_block = Miner.new.mine
     end
     @block = new_block
     Event.post_new_block(@block)

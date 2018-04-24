@@ -9,4 +9,4 @@
 <p>
   Block Height: <%= @block_height %>
 </p>
-<%= link_to 'Mine more', mine_path, class: 'btn btn-dark' %>
+<%= link_to 'Mine more', mine_path, class: 'btn btn-dark', data: { disable_with: "Please wait..." } %>

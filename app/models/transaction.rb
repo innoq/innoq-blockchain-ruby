@@ -1,11 +1,24 @@
 class Transaction < ApplicationRecord
   belongs_to :block, optional: true
 
-  default_scope { order(timestamp: :asc) }
+  scope :from_oldest, -> { order(timestamp: :asc) }
+  scope :from_newest, -> { order(timestamp: :desc) }
 
   scope :open, -> {
     where(block_id: nil)
   }
+
+  def open?
+    block_id.nil?
+  end
+
+  def processed_at
+    if block
+      block.timestamp
+    else
+      nil
+    end
+  end
 
   def to_builder
     Jbuilder.new do |json|

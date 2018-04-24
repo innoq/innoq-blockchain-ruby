@@ -13,15 +13,15 @@ class Chain
   # Make sure this chain is valid
   def is_hash_valid?
     blocks_valid = @blocks.all?(&:is_hash_valid?)
-    if !blocks_valid
-      puts "Not all blogs are valid"
+    unless blocks_valid
+      Rails.logger.error 'Not all blocks are valid'
       return false
     end
-    puts "all blogs are valid"
+    Rails.logger.debug 'all blocks are valid'
     expected_hash = '0'
     expected_hash = 0
     for i in 0..@blocks.size - 1
-      puts i
+      Rails.logger.debug i
       return false if !@blocks[i].previous_block_hash == expected_hash
       expected_hash = @blocks[i].block_chain_hash
     end
@@ -37,11 +37,11 @@ class Chain
       # our chain is longer, but retain "there" transactions
       other_branch.each do |block|
         transactions = block.transactions
-        puts "block #{block.inspect} has transactions: #{transactions.inspect}"
+        Rails.logger.debug "block #{block.inspect} has transactions: #{transactions.inspect}"
         # block.transactions=Transaction.none
 
         transactions.each do |t|
-          puts ' Nulling transactions block_id'
+          Rails.logger.debug ' Nulling transactions block_id'
           t.block_id = nil
         end
         transactions.each(&:save)
@@ -54,7 +54,7 @@ class Chain
       our_branch.each do |block|
         transactions = block.transactions
         transactions.each do |t|
-          puts 'Nulling transactions block_id'
+          Rails.logger.debug 'Nulling transactions block_id'
           t.block_id = nil
         end
         block.delete

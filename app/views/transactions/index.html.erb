@@ -1,9 +1,5 @@
 <h1>Transaction Index</h1>
 <ul>
-  <% @transactions.each do |transaction| %>
-    <li>
-      <%= link_to("#{transaction.transaction_id} - #{transaction.created_at}", transaction ) %>
-    </li>
-  <% end %>
+  <%= render partial: 'transaction_item', collection: @transactions %>
 </ul>
 <%= link_to 'Neue Transaktion', new_transaction_path, class: 'btn btn-dark' %>

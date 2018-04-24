@@ -75,7 +75,7 @@ class ChainTest < ActiveSupport::TestCase
     #
     chain_a.merge(chain_b)
 
-    puts "Open Transactions:"
+    Rails.logger.debug "Open Transactions:"
 
     assert Transaction.open.any? {|t|
       t == lost_transaction

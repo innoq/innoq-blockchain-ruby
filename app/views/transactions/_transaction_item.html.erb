@@ -1,0 +1,9 @@
+<li>
+  <% if transaction_item.open? %>
+    <%= link_to "#{transaction_item.transaction_id} - #{transaction_item.created_at} (Open)", transaction_item %>
+  <% else %>
+    <%= link_to "#{transaction_item.transaction_id} - #{transaction_item.created_at} (Processed at: #{transaction_item.processed_at})",
+                transaction_item,
+                class: 'text-muted' %>
+  <% end %>
+</li>

@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.from_newest
   end
 
   def new
