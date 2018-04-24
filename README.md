@@ -19,7 +19,7 @@ This app is a run of the mill Ruby on Rails 5.1 web application.
 
 In order to try it, you need to
 
-* Have ruby 2.5 installed
+* Have ruby 2.4 installed
 
 * Install `bundler`
 
